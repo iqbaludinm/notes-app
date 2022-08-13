@@ -29,8 +29,7 @@
             <section class="button">
                 <div class="searchBox">
                         <input class="searchInput"type="text"  placeholder="Documentation API " readonly>
-
-                    <button class="searchButton" href="#">API BACKEND</button>
+                       <a class="searchButton" href="https://notedapp-api.herokuapp.com/api/documentation" target="_blank">API BACKEND</a>
                 </div>
             </section>
             <section class="social_icons">
