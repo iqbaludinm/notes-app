@@ -10,6 +10,54 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/register",
+     *     tags={"Authentication"},
+     *     operationId="register",
+     *     @OA\Parameter(
+     *          name="name",
+     *          description="name",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          name="email",
+     *          description="Email",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          name="password",
+     *          description="Password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          name="confirm password",
+     *          description="Confirm Password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+
     public function store(Request $request)
     {
 

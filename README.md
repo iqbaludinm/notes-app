@@ -10,12 +10,13 @@
 - [ ] CRUD Notes 
 - [ ] CRUD Categories
 
-- [ ] Data Dummy with Seeder
+
 
 ## On Progress
-- [ ] Documentation API with Swagger 
+- [ ] Data Dummy with Seeder
 
 ## Done
 - [x] Authentication 
 - [x] Migration Database 
+- [x] Documentation API with Swagger 
 
