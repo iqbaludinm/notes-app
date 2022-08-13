@@ -8,19 +8,19 @@
 
 ##  API NOTED
 
-<h4> <a href="http://127.0.0.1:8000/api/documentation" target="_blank"> Documentation API</a> </h4>
+<h4> <a href="https://notedapp-api.herokuapp.com/api/documentation" target="_blank"> Documentation API</a> </h4>
 
 ##  Todo
 - [ ] CRUD Notes 
 - [ ] CRUD Categories
 
-
-
 ## On Progress
+- [ ] CRUD Categories
 - [ ] Data Dummy with Seeder
 
 ## Done
 - [x] Authentication 
 - [x] Migration Database 
 - [x] Documentation API with Swagger 
+- [x] Deploy
 
