@@ -4,20 +4,18 @@
 
 ##  Database Arsitekture
 
-<h4> <a href="#" target="_blank"> DbDIagram</a> </h4>
+<h4> <a href="https://dbdiagram.io/d/62ea94c0f31da965e873546a" target="_blank"> DbDIagram</a> </h4>
 
 ##  Todo
-- [ ] Documentation API with Swagger 
 - [ ] CRUD Notes 
 - [ ] CRUD Categories
 
+- [ ] Data Dummy with Seeder
 
 ## On Progress
-- [ ] Authentication 
+- [ ] Documentation API with Swagger 
 
 ## Done
-
-
-
-
+- [x] Authentication 
+- [x] Migration Database 
 
