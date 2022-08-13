@@ -7,12 +7,13 @@
 <h4> <a href="#" target="_blank"> DbDIagram</a> </h4>
 
 ##  Todo
-- [ ] Authentication 
 - [ ] Documentation API with Swagger 
-- [ ] 
+- [ ] CRUD Notes 
+- [ ] CRUD Categories
+
 
 ## On Progress
-
+- [ ] Authentication 
 
 ## Done
 
