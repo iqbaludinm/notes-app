@@ -6,6 +6,10 @@
 
 <h4> <a href="https://dbdiagram.io/d/62ea94c0f31da965e873546a" target="_blank"> DbDIagram</a> </h4>
 
+##  API NOTED
+
+<h4> <a href="http://127.0.0.1:8000/api/documentation" target="_blank"> Documentation API</a> </h4>
+
 ##  Todo
 - [ ] CRUD Notes 
 - [ ] CRUD Categories
