@@ -1,17 +1,18 @@
 <h1 align="center">Noted APP</h1>
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="https://github.com/iqbaludinm/notes-app/blob/master/thumbnail.png" width="300"></a></p>
 
 ##  Database Arsitekture
 
 <h4> <a href="#" target="_blank"> DbDIagram</a> </h4>
 
 ##  Todo
-- [] Authentication 
-- [] Documentation API with Swagger 
-- [] 
+- [ ] Authentication 
+- [ ] Documentation API with Swagger 
+- [ ] 
 
 ## On Progress
+
 
 ## Done
 
