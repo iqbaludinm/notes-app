@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-
+use Illuminate\Support\Str;
 class RegisterController extends Controller
 {
     /**
@@ -43,8 +43,8 @@ class RegisterController extends Controller
      *          )
      *     ),
      *     @OA\Parameter(
-     *          name="confirm password",
-     *          description="Confirm Password",
+     *          name="password_confirmation",
+     *          description="password_confirmation",
      *          required=true,
      *          in="query",
      *          @OA\Schema(
@@ -77,6 +77,7 @@ class RegisterController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'slug' =>  Str::slug($request->name),
             'password' => Hash::make($request->password)
         ]);
         return response()->json([
