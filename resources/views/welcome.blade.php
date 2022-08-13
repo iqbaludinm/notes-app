@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>NOTES APP</title>
 
        <!--GOOGLE FONTS-->
@@ -15,11 +16,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!--EXTERNAL STYLE SHEET-->
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('/css/style.css')}}">
     </head>
     <body>
         <div class="content">
-            <img src="{{asset('img/logosa.png')}}" class="logo" alt="LOGO" width="50" >
+            <img src="{{asset('/img/logosa.png')}}" class="logo" alt="LOGO" width="50" >
             <h1>NOTES<br> YOUR DAILY</h1>
             <h2>An awesome website is under construction, stay tuned.</h2>
             <div class="arrow bounce">
