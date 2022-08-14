@@ -11,16 +11,16 @@
 <h4> <a href="https://notedapp-api.herokuapp.com/api/documentation" target="_blank"> Documentation API</a> </h4>
 
 ##  Todo
-- [ ] CRUD Notes 
 - [ ] CRUD Categories
 
 ## On Progress
 - [ ] CRUD Categories
-- [ ] Data Dummy with Seeder
 
 ## Done
 - [x] Authentication 
 - [x] Migration Database 
 - [x] Documentation API with Swagger 
 - [x] Deploy
+- [x] CRUD Notes 
+- [x] Data Dummy with Seeder
 
