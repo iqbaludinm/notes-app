@@ -12,7 +12,7 @@ class AuthencateController extends Controller
 {
         /**
      * @OA\Post(
-     *     path="/login",
+     *     path="/api/login",
      *     tags={"Authentication"},
      *     operationId="login",
      *     @OA\Parameter(
@@ -58,7 +58,7 @@ class AuthencateController extends Controller
 
        /**
      * @OA\Post(
-     *     path="/logout",
+     *     path="/api/logout",
      *     tags={"Authentication"},
      *     operationId="logout",
      *     @OA\Response(

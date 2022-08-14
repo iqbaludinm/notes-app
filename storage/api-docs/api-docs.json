@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/login": {
+        "/api/login": {
             "post": {
                 "tags": [
                     "Authentication"
@@ -38,7 +38,7 @@
                 }
             }
         },
-        "/logout": {
+        "/api/logout": {
             "post": {
                 "tags": [
                     "Authentication"
@@ -51,7 +51,139 @@
                 }
             }
         },
-        "/register": {
+        "/api/notes": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notes",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/note/{id}": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notedetails",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/note/create": {
+            "post": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "noteadd",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "user_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "category_id ",
+                        "in": "query",
+                        "description": "category_id ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "title",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content",
+                        "in": "query",
+                        "description": "content",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/update/{id}": {
+            "put": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "noteupdate",
+                "parameters": [
+                    {
+                        "name": "category_id ",
+                        "in": "query",
+                        "description": "category_id ",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "title",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "content",
+                        "in": "query",
+                        "description": "content",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notedelete",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/register": {
             "post": {
                 "tags": [
                     "Authentication"
@@ -86,9 +218,9 @@
                         }
                     },
                     {
-                        "name": "confirm password",
+                        "name": "password_confirmation",
                         "in": "query",
-                        "description": "Confirm Password",
+                        "description": "password_confirmation",
                         "required": true,
                         "schema": {
                             "type": "string"

@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/register",
+     *     path="/api/register",
      *     tags={"Authentication"},
      *     operationId="register",
      *     @OA\Parameter(

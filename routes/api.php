@@ -33,9 +33,11 @@ Route::post('logout',[AuthencateController::class, 'logout']);
 // note
 // not set yet to add middleware('auth')
 Route::get('notes', [NoteController::class, 'getAll']);
+
 Route::group(['prefix' => 'note'], function() {
+
     Route::post('/create', [NoteController::class, 'createNote']);
     Route::get('/{id}', [NoteController::class, 'getDetail']);
-    Route::post('/update/{id}', [NoteController::class, 'updateNote']);
+    Route::put('/update/{id}', [NoteController::class, 'updateNote']);
     Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
 });
