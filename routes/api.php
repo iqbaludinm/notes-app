@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthencateController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,12 @@ Route::post('register',[RegisterController::class, 'store']);
 Route::post('login',[AuthencateController::class, 'login']);
 Route::post('logout',[AuthencateController::class, 'logout']);
 
-
-
+// note
+// not set yet to add middleware('auth')
+Route::get('notes', [NoteController::class, 'getAll']);
+Route::group(['prefix' => 'note'], function() {
+    Route::post('/create', [NoteController::class, 'createNote']);
+    Route::get('/{id}', [NoteController::class, 'getDetail']);
+    Route::post('/update/{id}', [NoteController::class, 'updateNote']);
+    Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
+});
