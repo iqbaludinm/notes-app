@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,11 +48,7 @@ class AuthencateController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))){
-            return response()->json([
-                'status' => true,
-                'message' => 'Congratulations, you have successfully logged in!',
-                'Data' => Auth::user()
-            ]);
+            return ResponseHelper::responseSuccessWithData('Congratulations, you have successfully logged in!', Auth::user());
         }
         throw ValidationException::withMessages([
             'email' =>['The provided credentials are incorect.']
@@ -73,9 +70,6 @@ class AuthencateController extends Controller
     public function logout()
     {
         Auth::logout();
-        return response()->json([
-            'status' => true,
-            'message' => 'Log out successfully!',
-          ]);
+        return ResponseHelper::responseSuccess('Log out successfully!');
     }
 }

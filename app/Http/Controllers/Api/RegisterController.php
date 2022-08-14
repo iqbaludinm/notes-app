@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -68,10 +69,7 @@ class RegisterController extends Controller
         ]);
 
         if($validation->fails()) :
-            return response()->json([
-                'status' => false,
-                'message' => $validation->errors()
-            ],404);
+            return ResponseHelper::responseValidation($validation->errors());
         endif;
 
         User::create([
@@ -80,9 +78,6 @@ class RegisterController extends Controller
             'slug' =>  Str::slug($request->name),
             'password' => Hash::make($request->password)
         ]);
-        return response()->json([
-            'status' => true,
-            'message' => 'You have successfully registered, Please Login!',
-          ]);
+        return ResponseHelper::responseSuccess('You have successfully registered, Please Login!');
     }
 }

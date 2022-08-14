@@ -33,7 +33,7 @@ class NoteController extends Controller
         ]);
         
         if($validation->fails()) :
-            return ResponseHelper::responseError($validation->errors(), 400);
+            return ResponseHelper::responseValidation($validation->errors());
         endif;
 
         try {
@@ -67,7 +67,7 @@ class NoteController extends Controller
         ]);
         
         if($validation->fails()) :
-            return ResponseHelper::responseError($validation->errors(), 400);
+            return ResponseHelper::responseValidation($validation->errors());
         endif;
         
         try {
