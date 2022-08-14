@@ -18,7 +18,7 @@ class NoteSeeder extends Seeder
             'user_id' => 1,
             'category_id' => 1,
             'title' => 'List Makanan yang musti dicobain di Malang',
-            'body' => 'Mie Bakar Celaket, Ketan Susu Djoeang',
+            'content' => 'Mie Bakar Celaket, Ketan Susu Djoeang',
         ]);
     }
 }
