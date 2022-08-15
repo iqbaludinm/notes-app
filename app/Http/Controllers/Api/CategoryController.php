@@ -141,7 +141,8 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
             $category->update([
-                'name' => $request->title
+                'name' => $request->name,
+                'slug' =>  Str::slug($request->name),
             ]);
             $category->save();
 
