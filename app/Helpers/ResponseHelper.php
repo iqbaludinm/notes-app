@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
   class ResponseHelper{
-    
+
       public static function responseValidation($errors)
       {
         return response()->json([
@@ -38,7 +38,7 @@ namespace App\Helpers;
               'data' => $data
           ], 200);
       }
-      
+
       public static function responseCreated($msg = null, $data = null)
       {
           return response()->json([

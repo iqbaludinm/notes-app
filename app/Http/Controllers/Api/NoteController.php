@@ -8,9 +8,18 @@ use Exception;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Symfony\Component\HttpFoundation\Response;
 class NoteController extends Controller
 {
+    // protected $user;
+    // public function __construct()
+    // {
+    //     $this->user = JWTAuth::parseToken()->authenticate();
+    // }
+
+
     /**
      * @OA\Get(
      *     path="/api/notes",
@@ -198,7 +207,7 @@ class NoteController extends Controller
         }
     }
 
-        /**
+    /**
      * @OA\Delete(
      *     path="/api/delete/{id}",
      *     tags={"Notes"},

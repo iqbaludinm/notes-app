@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Str;
+
+
 class RegisterController extends Controller
 {
     /**
@@ -61,17 +63,18 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-
-        $validation = Validator::make($request->all(), [
-               'name' => ['required'],
-                'email' => ['required', 'email', 'unique:users'],
-                'password' =>['required', 'min:6', 'confirmed']
+        //Validate data
+        $data = $request->only('name', 'email', 'password','password_confirmation');
+        $validator = Validator::make($data, [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6|max:50|confirmed'
         ]);
 
-        if($validation->fails()) :
-            return ResponseHelper::responseValidation($validation->errors());
-        endif;
-
+        // Respon Gagal jikam request tidak valid
+        if ($validator->fails()) {
+            return ResponseHelper::responseValidation($validator->errors(), 200);
+        }
         User::create([
             'name' => $request->name,
             'email' => $request->email,

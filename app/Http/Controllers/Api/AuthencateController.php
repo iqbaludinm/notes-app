@@ -6,11 +6,15 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class AuthencateController extends Controller
 {
-        /**
+    /**
      * @OA\Post(
      *     path="/api/login",
      *     tags={"Authentication"},
@@ -42,21 +46,43 @@ class AuthencateController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
+        $credentials = $request->only('email', 'password');
+        //valid credential
+        $validator = Validator::make($credentials, [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6|max:50'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))){
-            return ResponseHelper::responseSuccessWithData('Congratulations, you have successfully logged in!', Auth::user());
+        if ($validator->fails()) {
+            return ResponseHelper::responseValidation($validator->errors(), 200);
         }
-        throw ValidationException::withMessages([
-            'email' =>['The provided credentials are incorect.']
+
+        // Request divalidasi
+        // buat token
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                	'success' => false,
+                	'message' => 'Login credentials are invalid.',
+                ], 400);
+            }
+        } catch (JWTException $e) {
+    	return $credentials;
+            return response()->json([
+                	'success' => false,
+                	'message' => 'Could not create token.',
+                ], 500);
+        }
+
+ 		//Token dibuat, kembali dengan respons sukses dan token jwt
+        return response()->json([
+            'success' => true,
+            'token' => $token,
         ]);
 
     }
 
-       /**
+    /**
      * @OA\Post(
      *     path="/api/logout",
      *     tags={"Authentication"},
@@ -67,9 +93,41 @@ class AuthencateController extends Controller
      *     )
      * )
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
-        return ResponseHelper::responseSuccess('Log out successfully!');
+        // Auth::logout();
+        // return ResponseHelper::responseSuccess('Log out successfully!');
+
+        //valid credential
+        $validator = Validator::make($request->only('token'), [
+            'token' => 'required'
+        ]);
+
+        // kirim Gagal response jika request tidak valid
+        if ($validator->fails()) {
+            return ResponseHelper::responseValidation($validator->errors(), 200);
+        }
+
+		// Request divalidasi, lakukan logout
+        try {
+            JWTAuth::invalidate($request->token);
+            return ResponseHelper::responseSuccess('Log out successfully!');
+        } catch (JWTException $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, user cannot be logged out'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function getUser(Request $request)
+    {
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
+
+        $user = JWTAuth::authenticate($request->token);
+
+        return response()->json(['user' => $user]);
     }
 }
