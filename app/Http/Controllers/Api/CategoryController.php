@@ -16,40 +16,56 @@ use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     /**
+     * @OA\Get(
+     *     path="/api/categories",
+     *     tags={"Categories"},
+     *     operationId="categories",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getAllCategory()
+    {
+        $notes = Category::all();
+        return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/category/{id}",
+     *     tags={"Categories"},
+     *     operationId="categoriesById",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getCategoryById($id)
+    {
+        $note = Category::find($id);
+        return ResponseHelper::responseSuccessWithData('Successfully get data category with id', $note);
+    }
+
+    /**
      * @OA\Post(
-     *     path="/register",
-     *     tags={"Authentication"},
-     *     operationId="register",
+     *     path="/api/category/create",
+     *     tags={"Categories"},
+     *     operationId="categoriesadd",
+     *     @OA\Parameter(
+     *          name="user_id",
+     *          description="user_id",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
      *     @OA\Parameter(
      *          name="name",
      *          description="name",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *     @OA\Parameter(
-     *          name="email",
-     *          description="Email",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *     @OA\Parameter(
-     *          name="password",
-     *          description="Password",
-     *          required=true,
-     *          in="query",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *     @OA\Parameter(
-     *          name="password_confirmation",
-     *          description="password_confirmation",
      *          required=true,
      *          in="query",
      *          @OA\Schema(
@@ -62,19 +78,6 @@ class CategoryController extends Controller
      *     )
      * )
      */
-
-    public function getAllCategory()
-    {
-        $notes = Category::all();
-        return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
-    }
-
-    public function getCategoryById($id)
-    {
-        $note = Category::find($id);
-        return ResponseHelper::responseSuccessWithData('Successfully get data category with id', $note);
-    }
-
     public function createCategory(Request $request)
     {
         $validation = Validator::make($request->all(), [
@@ -105,10 +108,29 @@ class CategoryController extends Controller
         }
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/category/update/{id}",
+     *     tags={"Categories"},
+     *     operationId="categoriesupdate",
+     *     @OA\Parameter(
+     *          name="name",
+     *          description="name",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function updateCategory(Request $request, $id)
     {
-        $validation = Validator::make($request->only('user_id', 'name'), [
-            'user_id' => 'required|integer',
+        $validation = Validator::make($request->only('name'), [
             'name' => 'required|string|max:50'
         ]);
 
@@ -119,7 +141,6 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
             $category->update([
-                'user_id' => $request->user_id,
                 'name' => $request->title
             ]);
             $category->save();
@@ -134,6 +155,17 @@ class CategoryController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/category/delete/{id}",
+     *     tags={"Categories"},
+     *     operationId="categoriesdelete",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function deleteCategory($id)
     {
         $category = Category::find($id);

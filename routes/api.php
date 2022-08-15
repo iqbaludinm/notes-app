@@ -43,10 +43,11 @@ Route::group(['prefix' => 'note'], function() {
     Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
 });
 
+Route::get('categories', [CategoryController::class, 'getAllCategory']);
+
 Route::group(['prefix' => 'category'], function() {
 
     Route::post('/create', [CategoryController::class, 'createCategory']);
-    Route::get('/', [CategoryController::class, 'getAllCategory']);
     Route::get('/{id}', [CategoryController::class, 'getCategoryById']);
     Route::put('/update/{id}', [CategoryController::class, 'updateCategory']);
     Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory']);

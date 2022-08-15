@@ -51,6 +51,102 @@
                 }
             }
         },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "categories",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/category/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "categoriesById",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/category/create": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "categoriesadd",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "user_id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/category/update/{id}": {
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "categoriesupdate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/category/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "categoriesdelete",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/api/notes": {
             "get": {
                 "tags": [
