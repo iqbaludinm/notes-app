@@ -69,6 +69,12 @@ class CategoryController extends Controller
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
 
+    public function getCategoryById($id)
+    {
+        $note = Category::find($id);
+        return ResponseHelper::responseSuccessWithData('Successfully get data category with id', $note);
+    }
+
     public function createCategory(Request $request)
     {
         $validation = Validator::make($request->all(), [

@@ -47,6 +47,7 @@ Route::group(['prefix' => 'category'], function() {
 
     Route::post('/create', [CategoryController::class, 'createCategory']);
     Route::get('/', [CategoryController::class, 'getAllCategory']);
+    Route::get('/{id}', [CategoryController::class, 'getCategoryById']);
     Route::put('/update/{id}', [CategoryController::class, 'updateCategory']);
     Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory']);
 });
