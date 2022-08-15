@@ -32,25 +32,25 @@ Route::post('login',[AuthencateController::class, 'login']);
 Route::post('logout',[AuthencateController::class, 'logout']);
 
 // note
-// not set yet to add middleware('auth')
 Route::get('notes', [NoteController::class, 'getAll']);
 
-Route::group(['prefix' => 'note'], function() {
-
-    Route::post('/create', [NoteController::class, 'createNote']);
-    Route::get('/{id}', [NoteController::class, 'getDetail']);
-    Route::put('/update/{id}', [NoteController::class, 'updateNote']);
-    Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
-});
-
+// category
 Route::get('categories', [CategoryController::class, 'getAllCategory']);
 
-Route::group(['prefix' => 'category'], function() {
-
-    Route::post('/create', [CategoryController::class, 'createCategory']);
-    Route::get('/{id}', [CategoryController::class, 'getCategoryById']);
-    Route::put('/update/{id}', [CategoryController::class, 'updateCategory']);
-    Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory']);
+Route::group(['middleware' => 'auth'], function() {
+    // note 
+    Route::group(['prefix' => 'note'], function (){
+        Route::post('/create', [NoteController::class, 'createNote']);
+        Route::get('/{id}', [NoteController::class, 'getDetail']);
+        Route::put('/update/{id}', [NoteController::class, 'updateNote']);
+        Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
+    });
+    
+    // category
+    Route::group(['prefix' => 'category'], function() {
+        Route::post('/create', [CategoryController::class, 'createCategory']);
+        Route::get('/{id}', [CategoryController::class, 'getCategoryById']);
+        Route::put('/update/{id}', [CategoryController::class, 'updateCategory']);
+        Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory']);
+    });
 });
-
-

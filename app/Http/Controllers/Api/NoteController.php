@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Exception;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
@@ -25,7 +26,8 @@ class NoteController extends Controller
 
     public function getAll()
     {
-        $notes = Note::all();
+        $user_id = Auth::user()->id;
+        $notes = Note::all()->where('user_id', $user_id);
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
 
@@ -42,7 +44,11 @@ class NoteController extends Controller
      */
     public function getDetail($id)
     {
-        $note = Note::find($id);
+        $user_id = Auth::user()->id;
+        $note = Note::where([
+            ['id', $id],
+            ['user_id', $user_id]
+        ]);
         return ResponseHelper::responseSuccessWithData('Successfully get data note with id', $note);
     }
 
@@ -95,8 +101,7 @@ class NoteController extends Controller
      */
     public function createNote(Request $request)
     {
-        $validation = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
+        $validation = Validator::make($request->only('category_id', 'title', 'content'), [
             'category_id' => 'required|integer',
             'title' => 'required|string|max:50',
             'content' => 'required|string',
@@ -108,7 +113,7 @@ class NoteController extends Controller
 
         try {
             $note = Note::create([
-                'user_id' => $request->user_id,
+                'user_id' => Auth::user()->id,
                 'category_id' => $request->category_id,
                 'title' => $request->title,
                 'content' => $request->content,
@@ -212,7 +217,10 @@ class NoteController extends Controller
 
     public function deleteNote($id)
     {
-        $note = Note::find($id);
+        $note = Note::where([
+            'id' => $id,
+            'user_id' => Auth::user()->id
+        ]);
         $note->delete();
         return ResponseHelper::responseSuccess('Successfully deleting note');
     }
