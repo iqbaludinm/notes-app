@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthencateController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\NoteController;
 use Illuminate\Http\Request;
@@ -41,3 +42,13 @@ Route::group(['prefix' => 'note'], function() {
     Route::put('/update/{id}', [NoteController::class, 'updateNote']);
     Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
 });
+
+Route::group(['prefix' => 'category'], function() {
+
+    Route::post('/create', [CategoryController::class, 'createCategory']);
+    Route::get('/', [CategoryController::class, 'getAllCategory']);
+    Route::put('/update/{id}', [CategoryController::class, 'updateCategory']);
+    Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory']);
+});
+
+
