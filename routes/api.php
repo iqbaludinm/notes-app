@@ -37,8 +37,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::put('/update/{id}', [NoteController::class, 'updateNote']);
         Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
         Route::get('/search/{keyword}', [NoteController::class, 'searchNote']);
-        Route::get('/sort/title', [NoteController::class, 'sortByTitle']);
-        Route::get('/sort/date', [NoteController::class, 'sortByDateModified']);
     });
 
     // categories

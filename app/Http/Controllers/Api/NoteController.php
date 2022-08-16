@@ -33,10 +33,31 @@ class NoteController extends Controller
      * )
      */
 
-    public function getAll()
+    public function getAll(Request $request)
     {
         $user_id = Auth::user()->id;
-        $notes = Note::all()->where('user_id', $user_id);
+        $note_query = Note::where('user_id', $user_id);
+
+        if ($request->sortBy && in_array(
+            $request->sortBy,
+            ['title', 'created_at']
+        )) {
+            $sortBy = $request->sortBy;
+        } else {
+            $sortBy = 'title';
+        }
+
+        if ($request->sortOrder && in_array(
+            $request->sortOrder,
+            ['asc', 'desc']
+        )) {
+            $sortOrder = $request->sortOrder;
+        } else {
+            $sortOrder = 'asc';
+        }
+
+        $notes = $note_query->orderBy($sortBy, $sortOrder)->get();
+
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
 
@@ -241,17 +262,5 @@ class NoteController extends Controller
         return ResponseHelper::responseSuccessWithData('Successfully get data notes on your search keyword', $search_note);
     }
 
-    public function sortByTitle(Request $request){
-        $user_id = Auth::user()->id;
-        $sort_title = Note::where('id', $user_id)->orderBy('title')->get();
-        
-        return ResponseHelper::responseSuccessWithData('Successfully get data notes on your sort title', $sort_title);
-    }
-
-    public function sortByDateModified(Request $request){
-        $user_id = Auth::user()->id;
-        $sort_date = Note::where('id', $user_id)->orderBy('created_at')->get();
-        
-        return ResponseHelper::responseSuccessWithData('Successfully get data notes on your sort date modified', $sort_date);
-    }
+    
 }

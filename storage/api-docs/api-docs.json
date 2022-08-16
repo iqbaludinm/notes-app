@@ -292,7 +292,7 @@
                 }
             }
         },
-        "/api/note/sort/title": {
+        "/api/notes?sortBy=title": {
             "get": {
                 "tags": [
                     "Notes"
@@ -305,7 +305,7 @@
                 }
             }
         },
-        "/api/note/sort/date": {
+        "/api/notes?sortBy=createdAt": {
             "get": {
                 "tags": [
                     "Notes"
