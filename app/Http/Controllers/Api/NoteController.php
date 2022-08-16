@@ -233,4 +233,11 @@ class NoteController extends Controller
         $note->delete();
         return ResponseHelper::responseSuccess('Successfully deleting note');
     }
+
+    public function searchNote(Request $request){
+        $user_id = Auth::user()->id;
+        $search_note = Note::where('id', $user_id)->where('title', 'LIKE', '%'.$request->title.'%')->get();
+        
+        return ResponseHelper::responseSuccessWithData('Successfully get data notes on your search keyword', $search_note);
+    }
 }

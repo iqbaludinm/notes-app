@@ -224,7 +224,7 @@
                 }
             }
         },
-        "/api/update/{id}": {
+        "/api/note/update/{id}": {
             "put": {
                 "tags": [
                     "Notes"
@@ -266,12 +266,25 @@
                 }
             }
         },
-        "/api/delete/{id}": {
+        "/api/note/delete/{id}": {
             "delete": {
                 "tags": [
                     "Notes"
                 ],
                 "operationId": "notedelete",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/note/search/{keyword}": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesearch",
                 "responses": {
                     "default": {
                         "description": "successful operation"
