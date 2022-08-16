@@ -32,12 +32,12 @@ class CategoryController extends Controller
      *     )
      * )
      */
-    public function getAll()
+    public function getAllCategory()
     {
+        
         $user_id = Auth::user()->id;
-        $notes = Category::all()->where('user_id', $user_id);
-
-        return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
+        $categories = Category::all()->where('user_id', $user_id);
+        return ResponseHelper::responseSuccessWithData('Successfully retrieve all categories', $categories);
     }
 
     /**
