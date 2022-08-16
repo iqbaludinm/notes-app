@@ -13,38 +13,37 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // authentication
-Route::post('register',[RegisterController::class, 'store']);
-Route::post('login',[AuthencateController::class, 'login']);
+Route::post('register', [RegisterController::class, 'store']);
+Route::post('login', [AuthencateController::class, 'login']);
 
 
-// notes
-Route::get('notes', [NoteController::class, 'getAll']);
 
-// categories
-Route::get('categories', [CategoryController::class, 'getAllCategory']);
+Route::group(['middleware' => ['jwt.verify']], function () {
+    // notes
+    Route::get('notes', [NoteController::class, 'getAll']);
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+    // categories
+    Route::get('categories', [CategoryController::class, 'getAll']);
 
     // Get User
     Route::get('user', [AuthencateController::class, 'getUser']);
 
     // logout
-    Route::get('logout',[AuthencateController::class, 'logout']);
+    Route::get('logout', [AuthencateController::class, 'logout']);
 
     // note
-    Route::group(['prefix' => 'note'], function() {
+    Route::group(['prefix' => 'note'], function () {
         Route::post('/create', [NoteController::class, 'createNote']);
         Route::get('/{id}', [NoteController::class, 'getDetail']);
         Route::put('/update/{id}', [NoteController::class, 'updateNote']);
         Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
     });
-    
+
     // category
-    Route::group(['prefix' => 'category'], function() {
+    Route::group(['prefix' => 'category'], function () {
         Route::post('/create', [CategoryController::class, 'createCategory']);
         Route::get('/{id}', [CategoryController::class, 'getCategoryById']);
         Route::put('/update/{id}', [CategoryController::class, 'updateCategory']);
         Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory']);
     });
-
 });

@@ -15,6 +15,12 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    // protected $user;
+    // public function __construct()
+    // {
+    //     $this->user = JWTAuth::parseToken()->authenticate();
+    // }
+
     /**
      * @OA\Get(
      *     path="/api/categories",
@@ -26,10 +32,12 @@ class CategoryController extends Controller
      *     )
      * )
      */
-    public function getAllCategory()
+    public function getAll()
     {
-        $notes = Category::all();
-        return ResponseHelper::responseSuccessWithData('Successfully retrieve all categories', $notes);
+        $user_id = Auth::user()->id;
+        $notes = Category::all()->where('user_id', $user_id);
+
+        return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
 
     /**
@@ -84,7 +92,7 @@ class CategoryController extends Controller
      */
     public function createCategory(Request $request)
     {
-        $validation = Validator::make($request->all(), [
+        $validation = Validator::make($request->only('name'), [
             'name' => 'required|string|max:50',
         ]);
 
@@ -172,7 +180,10 @@ class CategoryController extends Controller
      */
     public function deleteCategory($id)
     {
-        $category = Category::find($id);
+        $category = Category::where([
+            'id' => $id,
+            'user_id' => Auth::user()->id
+        ]);
         $category->delete();
         return ResponseHelper::responseSuccess('Successfully deleting category');
     }
