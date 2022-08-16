@@ -242,15 +242,15 @@ class NoteController extends Controller
     }
 
     public function sortByTitle(Request $request){
-       
-        $sort_title = Note::orderBy('title')->get();
+        $user_id = Auth::user()->id;
+        $sort_title = Note::where('id', $user_id)->orderBy('title')->get();
         
         return ResponseHelper::responseSuccessWithData('Successfully get data notes on your sort title', $sort_title);
     }
 
     public function sortByDateModified(Request $request){
-       
-        $sort_date = Note::orderBy('created_at')->get();
+        $user_id = Auth::user()->id;
+        $sort_date = Note::where('id', $user_id)->orderBy('created_at')->get();
         
         return ResponseHelper::responseSuccessWithData('Successfully get data notes on your sort date modified', $sort_date);
     }
