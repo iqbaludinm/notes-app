@@ -292,6 +292,32 @@
                 }
             }
         },
+        "/api/note/sort/title": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesorttitle",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/note/sort/date": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesortdate",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
