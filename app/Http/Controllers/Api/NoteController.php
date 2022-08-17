@@ -167,8 +167,8 @@ class NoteController extends Controller
     }
 
     /**
-     * @OA\Put(
-     *     path="/api/update/{id}",
+     * @OA\Post(
+     *     path="/api/update/{id}?_method=patch",
      *     tags={"Notes"},
      *     operationId="noteupdate",
      *     @OA\Parameter(

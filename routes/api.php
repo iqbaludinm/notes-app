@@ -19,6 +19,9 @@ Route::post('login', [AuthencateController::class, 'login']);
 // notes
 Route::get('notes', [NoteController::class, 'getAll']);
 
+// uri search notes: ../notes?search={search}
+// uri sort notes: ../notes?sort_by={title} or ../notes?sort_by={date}
+
 // categories
 Route::get('categories', [CategoryController::class, 'getAllCategory']);
 
@@ -31,6 +34,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // Upload Photo
     Route::post('/user/upload/photo/{id}',[RegisterController::class, 'upload']);
 
+    // change password
+    Route::post('user/change-password', [RegisterController::class, 'changePassword']);
+
     // logout
     Route::get('logout', [AuthencateController::class, 'logout']);
 
@@ -38,7 +44,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'note'], function () {
         Route::post('/create', [NoteController::class, 'createNote']);
         Route::get('/{id}', [NoteController::class, 'getDetail']);
-        Route::put('/update/{id}', [NoteController::class, 'updateNote']);
+        Route::post('/update/{id}', [NoteController::class, 'updateNote']);
         Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
     });
 
