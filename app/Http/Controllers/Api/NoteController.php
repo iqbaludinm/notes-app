@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
+
 class NoteController extends Controller
 {
     // protected $user;
@@ -32,31 +33,34 @@ class NoteController extends Controller
      *     )
      * )
      */
-
+    
     public function getAll(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $note_query = Note::where('user_id', $user_id);
+        $note_query = Note::with(['user', 'category']);
 
-        if ($request->sortBy && in_array(
-            $request->sortBy,
-            ['title', 'created_at']
-        )) {
-            $sortBy = $request->sortBy;
-        } else {
-            $sortBy = 'title';
+        if ($request->search) {
+            $note_query->where('title', 'LIKE', '%' . $request->search . '%');
         }
 
-        if ($request->sortOrder && in_array(
-            $request->sortOrder,
+        if ($request->sort_by && in_array(
+            $request->sort_by,
+            ['title', 'updated_at']
+        )) {
+            $sort_by = $request->sort_by;
+        } else {
+            $sort_by = 'id';
+        }
+
+        if ($request->sort_order && in_array(
+            $request->sort_order,
             ['asc', 'desc']
         )) {
-            $sortOrder = $request->sortOrder;
+            $sort_order = $request->sort_order;
         } else {
-            $sortOrder = 'asc';
+            $sort_order = 'asc';
         }
 
-        $notes = $note_query->orderBy($sortBy, $sortOrder)->get();
+        $notes = $note_query->orderBy($sort_by, $sort_order)->get();
 
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
@@ -137,7 +141,7 @@ class NoteController extends Controller
             'content' => 'required|string',
         ]);
 
-        if($validation->fails()) :
+        if ($validation->fails()) :
             return ResponseHelper::responseValidation($validation->errors());
         endif;
 
@@ -152,12 +156,11 @@ class NoteController extends Controller
 
             $data = Note::where('id', $note->id)->with(['user', 'category'])->get();
 
-            if($data) :
+            if ($data) :
                 return ResponseHelper::responseCreated('Successfully created new note!', $data);
             else :
                 return ResponseHelper::responseError('Note not created', 400);
             endif;
-
         } catch (Exception $error) {
             return ResponseHelper::responseError($error->getMessage(), 400);
         }
@@ -209,7 +212,7 @@ class NoteController extends Controller
             'content' => 'required|string',
         ]);
 
-        if($validation->fails()) :
+        if ($validation->fails()) :
             return ResponseHelper::responseValidation($validation->errors());
         endif;
 
@@ -222,12 +225,11 @@ class NoteController extends Controller
             ]);
             $note->save();
 
-            if($note) :
+            if ($note) :
                 return ResponseHelper::responseSuccessWithData('Successfully update note', $note);
             else :
                 return ResponseHelper::responseError('Note not updated', 400);
             endif;
-
         } catch (Exception $error) {
             return ResponseHelper::responseError($error->getMessage(), 400);
         }
@@ -255,12 +257,5 @@ class NoteController extends Controller
         return ResponseHelper::responseSuccess('Successfully deleting note');
     }
 
-    public function searchNote(Request $request){
-        $user_id = Auth::user()->id;
-        $search_note = Note::where('id', $user_id)->where('title', 'LIKE', '%'.$request->title.'%')->get();
-        
-        return ResponseHelper::responseSuccessWithData('Successfully get data notes on your search keyword', $search_note);
-    }
 
-    
 }

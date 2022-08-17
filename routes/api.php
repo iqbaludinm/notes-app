@@ -40,7 +40,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/{id}', [NoteController::class, 'getDetail']);
         Route::put('/update/{id}', [NoteController::class, 'updateNote']);
         Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
-        Route::get('/search/{keyword}', [NoteController::class, 'searchNote']);
     });
 
 

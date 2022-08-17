@@ -173,6 +173,45 @@
                 }
             }
         },
+        "/api/notes?search={search}": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notessearch",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/notes?sort_by=title": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notessorttitle",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/notes?sort_by=updated_at": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notessortupdatedat",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/api/note/{id}": {
             "get": {
                 "tags": [
