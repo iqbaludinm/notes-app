@@ -170,10 +170,10 @@ class RegisterController extends Controller
             return ResponseHelper::responseSuccess('Data successfully updated');
     }
 
-
-
-
-
+    public function resetpassword(Request $request)
+    {
+        //
+    }
 
 
 }
