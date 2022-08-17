@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'slug' => 'johan-nasendi',
             'email' => 'test@gmail.com',
             'password' => bcrypt('admin123'),
+            'photo' => 'default.png',
         ]);
     }
 }

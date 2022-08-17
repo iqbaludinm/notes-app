@@ -237,7 +237,7 @@
                 }
             }
         },
-        "/api/note/update/{id}": {
+        "/api/update/{id}": {
             "put": {
                 "tags": [
                     "Notes"
@@ -279,51 +279,12 @@
                 }
             }
         },
-        "/api/note/delete/{id}": {
+        "/api/delete/{id}": {
             "delete": {
                 "tags": [
                     "Notes"
                 ],
                 "operationId": "notedelete",
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/api/note/search/{keyword}": {
-            "get": {
-                "tags": [
-                    "Notes"
-                ],
-                "operationId": "notesearch",
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/api/notes?sortBy=title": {
-            "get": {
-                "tags": [
-                    "Notes"
-                ],
-                "operationId": "notesorttitle",
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/api/notes?sortBy=createdAt": {
-            "get": {
-                "tags": [
-                    "Notes"
-                ],
-                "operationId": "notesortdate",
                 "responses": {
                     "default": {
                         "description": "successful operation"
@@ -369,6 +330,54 @@
                         "name": "password_confirmation",
                         "in": "query",
                         "description": "password_confirmation",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/user/upload/photo/{id}": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "operationId": "upload",
+                "parameters": [
+                    {
+                        "name": "photo",
+                        "in": "query",
+                        "description": "photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/user/update/{id}": {
+            "put": {
+                "tags": [
+                    "Authentication"
+                ],
+                "operationId": "userupdate",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name",
                         "required": true,
                         "schema": {
                             "type": "string"

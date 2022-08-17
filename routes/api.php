@@ -23,6 +23,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     // Get User
     Route::get('user', [AuthencateController::class, 'getUser']);
+    // change user
+    Route::get('/user/update/{id}', [RegisterController::class, 'update']);
+    // Upload Photo
+    Route::post('/user/upload/photo/{id}',[RegisterController::class, 'upload']);
 
     // logout
     Route::get('logout', [AuthencateController::class, 'logout']);

@@ -34,7 +34,7 @@ class CategoryController extends Controller
      */
     public function getAllCategory()
     {
-        
+
         $user_id = Auth::user()->id;
         $categories = Category::all()->where('user_id', $user_id);
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all categories', $categories);
@@ -137,6 +137,7 @@ class CategoryController extends Controller
      *         response="default",
      *         description="successful operation"
      *     )
+     *
      * )
      */
     public function updateCategory(Request $request, $id)
