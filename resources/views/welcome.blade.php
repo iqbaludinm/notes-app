@@ -38,7 +38,7 @@
                 <a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
                 <a href="#" title="Instagram" target="_blank"><i class="fa fa-instagram"></i></a>
                 <a href="#" title="Twitter" target="_blank"><i class="fa fa-github"></i></a>
-                <a href="#" title="Telegram" target="_blank"><i class="fa fa-telegram"></i></a>
+                <a href="{{route('login')}}" title="Login" target="_blank"><i class="fa fa-sign-in"></i></a>
             </section>
         </div>
     </body>
