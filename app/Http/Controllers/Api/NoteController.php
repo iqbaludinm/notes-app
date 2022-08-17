@@ -33,10 +33,31 @@ class NoteController extends Controller
      * )
      */
 
-    public function getAll()
+    public function getAll(Request $request)
     {
         $user_id = Auth::user()->id;
-        $notes = Note::all()->where('user_id', $user_id);
+        $note_query = Note::where('user_id', $user_id);
+
+        if ($request->sortBy && in_array(
+            $request->sortBy,
+            ['title', 'created_at']
+        )) {
+            $sortBy = $request->sortBy;
+        } else {
+            $sortBy = 'title';
+        }
+
+        if ($request->sortOrder && in_array(
+            $request->sortOrder,
+            ['asc', 'desc']
+        )) {
+            $sortOrder = $request->sortOrder;
+        } else {
+            $sortOrder = 'asc';
+        }
+
+        $notes = $note_query->orderBy($sortBy, $sortOrder)->get();
+
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
 
@@ -233,4 +254,13 @@ class NoteController extends Controller
         $note->delete();
         return ResponseHelper::responseSuccess('Successfully deleting note');
     }
+
+    public function searchNote(Request $request){
+        $user_id = Auth::user()->id;
+        $search_note = Note::where('id', $user_id)->where('title', 'LIKE', '%'.$request->title.'%')->get();
+        
+        return ResponseHelper::responseSuccessWithData('Successfully get data notes on your search keyword', $search_note);
+    }
+
+    
 }

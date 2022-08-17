@@ -237,7 +237,7 @@
                 }
             }
         },
-        "/api/update/{id}": {
+        "/api/note/update/{id}": {
             "put": {
                 "tags": [
                     "Notes"
@@ -279,12 +279,51 @@
                 }
             }
         },
-        "/api/delete/{id}": {
+        "/api/note/delete/{id}": {
             "delete": {
                 "tags": [
                     "Notes"
                 ],
                 "operationId": "notedelete",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/note/search/{keyword}": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesearch",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/notes?sortBy=title": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesorttitle",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/notes?sortBy=createdAt": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesortdate",
                 "responses": {
                     "default": {
                         "description": "successful operation"

@@ -15,6 +15,12 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    // protected $user;
+    // public function __construct()
+    // {
+    //     $this->user = JWTAuth::parseToken()->authenticate();
+    // }
+
     /**
      * @OA\Get(
      *     path="/api/categories",
@@ -28,8 +34,10 @@ class CategoryController extends Controller
      */
     public function getAllCategory()
     {
-        $notes = Category::all();
-        return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
+        
+        $user_id = Auth::user()->id;
+        $categories = Category::all()->where('user_id', $user_id);
+        return ResponseHelper::responseSuccessWithData('Successfully retrieve all categories', $categories);
     }
 
     /**
@@ -45,8 +53,12 @@ class CategoryController extends Controller
      */
     public function getCategoryById($id)
     {
-        $note = Category::find($id);
-        return ResponseHelper::responseSuccessWithData('Successfully get data category with id', $note);
+        $user_id = Auth::user()->id;
+        $category = Category::where([
+            ['id', $id],
+            ['user_id', $user_id]
+        ]);
+        return ResponseHelper::responseSuccessWithData('Successfully get data category with id', $category);
     }
 
     /**
@@ -80,8 +92,7 @@ class CategoryController extends Controller
      */
     public function createCategory(Request $request)
     {
-        $validation = Validator::make($request->all(), [
-            'user_id' => 'required|integer',
+        $validation = Validator::make($request->only('name'), [
             'name' => 'required|string|max:50',
         ]);
 
@@ -91,7 +102,7 @@ class CategoryController extends Controller
 
         try {
             $category = Category::create([
-                'user_id' => $request->user_id,
+                'user_id' => Auth::user()->id,
                 'name' => $request->name,
                 'slug' =>  Str::slug($request->name),
             ]);
@@ -169,7 +180,10 @@ class CategoryController extends Controller
      */
     public function deleteCategory($id)
     {
-        $category = Category::find($id);
+        $category = Category::where([
+            'id' => $id,
+            'user_id' => Auth::user()->id
+        ]);
         $category->delete();
         return ResponseHelper::responseSuccess('Successfully deleting category');
     }

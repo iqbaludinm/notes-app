@@ -8,22 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'user_id'
-    ];
-
     protected $table = "categories";
-    
-    public function notes ()
-    {
-        return $this->hasMany(Note::class);
-    }
+    protected $fillable = ['name', 'slug', 'user_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
     }
 }
