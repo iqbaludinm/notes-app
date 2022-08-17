@@ -51,6 +51,19 @@
                 }
             }
         },
+        "/api/User": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "operationId": "User",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [

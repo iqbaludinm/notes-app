@@ -120,6 +120,17 @@ class AuthencateController extends Controller
         }
     }
 
+     /**
+     * @OA\Get(
+     *     path="/api/User",
+     *     tags={"Authentication"},
+     *     operationId="User",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function getUser(Request $request)
     {
         $this->validate($request, [
