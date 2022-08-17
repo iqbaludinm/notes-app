@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [RegisterController::class, 'store']);
 Route::post('login', [AuthencateController::class, 'login']);
 
+// notes
+Route::get('notes', [NoteController::class, 'getAll']);
 
-
+// categories
+Route::get('categories', [CategoryController::class, 'getAllCategory']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
 
@@ -31,9 +34,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     // logout
     Route::get('logout', [AuthencateController::class, 'logout']);
 
-    // notes
-    Route::get('notes', [NoteController::class, 'getAll']);
-
     // note
     Route::group(['prefix' => 'note'], function () {
         Route::post('/create', [NoteController::class, 'createNote']);
@@ -43,8 +43,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/search/{keyword}', [NoteController::class, 'searchNote']);
     });
 
-    // categories
-    Route::get('categories', [CategoryController::class, 'getAllCategory']);
 
     // category
     Route::group(['prefix' => 'category'], function () {

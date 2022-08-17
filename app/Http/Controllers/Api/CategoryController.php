@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Helpers\ResponseHelper;
-use App\Models\Category;
-use Illuminate\Http\Request;
 use Exception;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
-use App\Models\User;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    // protected $user;
-    // public function __construct()
-    // {
-    //     $this->user = JWTAuth::parseToken()->authenticate();
-    // }
-
     /**
      * @OA\Get(
      *     path="/api/categories",
@@ -34,9 +26,7 @@ class CategoryController extends Controller
      */
     public function getAllCategory()
     {
-
-        $user_id = Auth::user()->id;
-        $categories = Category::all()->where('user_id', $user_id);
+        $categories = Category::all();
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all categories', $categories);
     }
 
