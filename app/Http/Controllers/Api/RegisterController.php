@@ -136,6 +136,15 @@ class RegisterController extends Controller
      *     tags={"Authentication"},
      *     operationId="userupdate",
      *     @OA\Parameter(
+     *          name="email",
+     *          description="email",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
      *          name="name",
      *          description="name",
      *          required=true,
@@ -154,9 +163,10 @@ class RegisterController extends Controller
     public function update(Request $request, $id)
     {
         //Validate data
-        $data = $request->only('name');
+        $data = $request->only('name','email');
         $validator = Validator::make($data, [
             'name' => 'required|string',
+            'email' => 'required|email|unique:users',
         ]);
 
         if ($validator->fails()) {
@@ -164,6 +174,7 @@ class RegisterController extends Controller
         }
         User::where('id',$id)->update(
             [
+                'email' => $request->email,
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
             ]);

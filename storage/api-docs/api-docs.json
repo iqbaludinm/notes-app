@@ -51,7 +51,7 @@
                 }
             }
         },
-        "/api/User": {
+        "/api/user": {
             "get": {
                 "tags": [
                     "Authentication"
@@ -374,6 +374,15 @@
                 ],
                 "operationId": "userupdate",
                 "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "name",
                         "in": "query",

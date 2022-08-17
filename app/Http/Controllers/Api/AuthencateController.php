@@ -122,7 +122,7 @@ class AuthencateController extends Controller
 
      /**
      * @OA\Get(
-     *     path="/api/User",
+     *     path="/api/user",
      *     tags={"Authentication"},
      *     operationId="User",
      *     @OA\Response(
