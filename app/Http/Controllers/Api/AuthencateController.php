@@ -54,7 +54,7 @@ class AuthencateController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return ResponseHelper::responseValidation($validator->errors(), 200);
+            return ResponseHelper::responseValidation($validator->errors());
         }
 
         // Request divalidasi
@@ -105,7 +105,7 @@ class AuthencateController extends Controller
 
         // kirim Gagal response jika request tidak valid
         if ($validator->fails()) {
-            return ResponseHelper::responseValidation($validator->errors(), 200);
+            return ResponseHelper::responseValidation($validator->errors());
         }
 
 		// Request divalidasi, lakukan logout
