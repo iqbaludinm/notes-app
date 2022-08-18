@@ -44,7 +44,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'note'], function () {
         Route::post('/create', [NoteController::class, 'createNote']);
         Route::get('/{id}', [NoteController::class, 'getDetail']);
-        Route::post('/update/{id}', [NoteController::class, 'updateNote']);
+        Route::put('/update/{id}', [NoteController::class, 'updateNote']);
         Route::delete('/delete/{id}', [NoteController::class, 'deleteNote']);
     });
 

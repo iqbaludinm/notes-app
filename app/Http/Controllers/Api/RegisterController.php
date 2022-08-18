@@ -76,7 +76,7 @@ class RegisterController extends Controller
 
         // Respon Gagal jikam request tidak valid
         if ($validator->fails()) {
-            return ResponseHelper::responseValidation($validator->errors(), 200);
+            return ResponseHelper::responseValidation($validator->errors());
         }
         $user = User::create([
             'name' => $request->name,
@@ -171,7 +171,7 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return ResponseHelper::responseValidation($validator->errors(), 200);
+            return ResponseHelper::responseValidation($validator->errors());
         }
         User::where('id',$id)->update(
             [
