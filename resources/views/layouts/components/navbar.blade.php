@@ -10,7 +10,7 @@
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"
                data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{asset('/assets/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle">
+                    <img src="{{asset('/assets/images/users/user-3.jpg')}}" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">
                             {{Auth::user()->name}}
                             <i class="mdi mdi-chevron-down"></i>
@@ -47,21 +47,21 @@
     <div class="logo-box">
         <a href="#" class="logo logo-dark text-center" target="_blank">
             <span class="logo-sm">
-                    <img src="{{asset('img/logosa.png')}}" alt="" height="22">
+                    <img src="{{asset('img/logosa.png')}}" alt="" height="44">
                     <!-- <span class="logo-lg-text-light">UBold</span> -->
             </span>
             <span class="logo-lg">
-                    <img src="{{asset('img/logosa.png')}}" alt="" height="22">
+                    <img src="{{asset('img/logosa.png')}}" alt="" height="44">
                     <!-- <span class="logo-lg-text-light">U</span> -->
             </span>
         </a>
 
         <a href="#" class="logo logo-light text-center" target="_blank">
             <span class="logo-sm">
-                    <img src="{{asset('img/logosa.png')}}" alt="" height="22">
+                    <img src="{{asset('img/logosa.png')}}" alt="" height="44">
                 </span>
             <span class="logo-lg">
-                    <img src="{{asset('img/logosa.png')}}" alt="" height="22">
+                    <img src="{{asset('img/logosa.png')}}" alt="" height="44">
                 </span>
         </a>
     </div>

@@ -19,11 +19,11 @@ class CategorySeeder extends Seeder
            'name' => 'Catatan Harian',
            'slug' => 'catatan-harian',
         ]);
-        
+
         Category::create([
            'user_id' => 1,
-           'name' => 'Catatan Kuliah',
-           'slug' => 'catatan-kuliah',
+           'name' => 'Catatan Makanan',
+           'slug' => 'catatan-makanan',
         ]);
     }
 }

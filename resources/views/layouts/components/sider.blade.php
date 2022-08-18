@@ -16,22 +16,21 @@
              </li>
 
              <li>
-                 <a href="#">
-                     <i data-feather="home"></i>
+                 <a href="{{route('notes.index')}}">
+                     <i data-feather="clipboard"></i>
                      <span> Notes </span>
                  </a>
              </li>
              <li>
-                 <a href="#">
-                     <i data-feather="home"></i>
+                 <a href="{{route('categories.index')}}">
+                     <i data-feather="clipboard"></i>
                      <span> Categories </span>
                  </a>
              </li>
 
              <li>
-                 <a href="">
+                 <a href="{{route('users.index')}}">
                      <i data-feather="users"></i>
-                     <span class="badge badge-success badge-pill float-right"></span>
                      <span> Users </span>
                  </a>
              </li>

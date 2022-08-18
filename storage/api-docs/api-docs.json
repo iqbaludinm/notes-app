@@ -399,6 +399,19 @@
                     }
                 }
             }
+        },
+        "/api/user/change-password?_method=patch": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "userupdatepass",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
         }
     }
 }
