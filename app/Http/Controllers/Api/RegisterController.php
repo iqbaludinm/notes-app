@@ -78,12 +78,13 @@ class RegisterController extends Controller
         if ($validator->fails()) {
             return ResponseHelper::responseValidation($validator->errors(), 200);
         }
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'slug' =>  Str::slug($request->name),
             'password' => Hash::make($request->password)
         ]);
+        $user->attachRole('user');
         return ResponseHelper::responseSuccess('You have successfully registered, Please Login!');
     }
 
@@ -191,14 +192,14 @@ class RegisterController extends Controller
      *     path="/api/user/change-password?_method=patch",
      *     tags={"User"},
      *     operationId="userupdatepass",
-     *     
+     *
      *     @OA\Response(
      *         response="default",
      *         description="successful operation"
      *     )
      * )
      */
-    
+
     public function changePassword(Request $request)
     {
         $user_id = Auth::user()->id; // idk, this is work or not
@@ -206,25 +207,25 @@ class RegisterController extends Controller
         $validator = Validator::make($newPassword, [
             'password' => 'required|string|min:6|max:50|confirmed'
         ]);
-        
+
         if ($validator->fails()) {
             return ResponseHelper::responseValidation($validator->errors());
         }
         try {
             // harusnya ada cek apakah password lama benar
-            // karena gada attributenya, maka diserahkan ke fe 
-            
+            // karena gada attributenya, maka diserahkan ke fe
+
             $old_password = Auth::user()->password;
             User::where('id', $user_id)->update([
                 'password' => $newPassword
             ]);
-            return ResponseHelper::responseSuccessWithData('Success update your password!', 
+            return ResponseHelper::responseSuccessWithData('Success update your password!',
             [
                 "old-password" => $old_password
             ]);
         } catch (\Exception $err) {
             return ResponseHelper::responseError($err->getMessage(), 500);
         }
-        
+
     }
 }
