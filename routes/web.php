@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']] , function
     Route::get('/categories', [DashboardController::class, 'categoryll'])->name('categories.index');
 
 
-    Route::resource('/profile',ProfileController::class)->except('show','create','destroy','store');
+    Route::resource('/profile',ProfileController::class)->except('show','create','destroy','store','edit');
 
 
 });

@@ -188,8 +188,8 @@ class RegisterController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/user/change-password?_method=patch",
+     * @OA\Patch(
+     *     path="/api/user/change-password",
      *     tags={"User"},
      *     operationId="userupdatepass",
      *

@@ -35,7 +35,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/user/upload/photo/{id}',[RegisterController::class, 'upload']);
 
     // change password
-    Route::post('user/change-password', [RegisterController::class, 'changePassword']);
+    Route::patch('user/change-password', [RegisterController::class, 'changePassword']);
 
     // logout
     Route::get('logout', [AuthencateController::class, 'logout']);
