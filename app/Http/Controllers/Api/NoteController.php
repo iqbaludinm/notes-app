@@ -33,14 +33,11 @@ class NoteController extends Controller
      *     )
      * )
      */
-    
+
+
     public function getAll(Request $request)
     {
         $note_query = Note::with(['user', 'category']);
-
-        if ($request->search) {
-            $note_query->where('title', 'LIKE', '%' . $request->search . '%');
-        }
 
         if ($request->sort_by && in_array(
             $request->sort_by,
@@ -64,6 +61,43 @@ class NoteController extends Controller
 
         return ResponseHelper::responseSuccessWithData('Successfully retrieve all notes', $notes);
     }
+
+    public function sortby()
+    {
+
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/note/search/{keyword}",
+     *     tags={"Notes"},
+     *     operationId="notesSearch",
+     *     @OA\Parameter(
+     *          name="title",
+     *          description="title",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function search($name)
+    {
+            $result = Note::where('title', 'LIKE', '%'. $name. '%')->get();
+            if(count($result)){
+            return Response()->json($result);
+            }else{
+            return response()->json(['Result' => 'No Data not found'], 404);
+        }
+
+    }
+
 
     /**
      * @OA\Get(
@@ -167,8 +201,8 @@ class NoteController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/update/{id}?_method=patch",
+     * @OA\Put(
+     *     path="/api/note/update/{id}",
      *     tags={"Notes"},
      *     operationId="noteupdate",
      *     @OA\Parameter(
@@ -237,7 +271,7 @@ class NoteController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/delete/{id}",
+     *     path="/api/note/delete/{id}",
      *     tags={"Notes"},
      *     operationId="notedelete",
      *     @OA\Response(

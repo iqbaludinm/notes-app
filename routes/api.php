@@ -42,6 +42,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     // note
     Route::group(['prefix' => 'note'], function () {
+        Route::get('/search/{keyword}', [NoteController::class, 'search']);
         Route::post('/create', [NoteController::class, 'createNote']);
         Route::get('/{id}', [NoteController::class, 'getDetail']);
         Route::put('/update/{id}', [NoteController::class, 'updateNote']);

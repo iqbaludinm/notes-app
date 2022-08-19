@@ -33,7 +33,7 @@ namespace App\Helpers;
       public static function responseSuccessWithData($msg = null, $data = null)
       {
           return response()->json([
-              'status' => false,
+              'status' => true,
               'message' => $msg,
               'data' => $data
           ], 200);

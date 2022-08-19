@@ -173,6 +173,30 @@
                 }
             }
         },
+        "/api/note/search/{keyword}": {
+            "get": {
+                "tags": [
+                    "Notes"
+                ],
+                "operationId": "notesSearch",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "title",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/api/note/{id}": {
             "get": {
                 "tags": [
@@ -237,8 +261,8 @@
                 }
             }
         },
-        "/api/update/{id}?_method=patch": {
-            "post": {
+        "/api/note/update/{id}": {
+            "put": {
                 "tags": [
                     "Notes"
                 ],
@@ -279,7 +303,7 @@
                 }
             }
         },
-        "/api/delete/{id}": {
+        "/api/note/delete/{id}": {
             "delete": {
                 "tags": [
                     "Notes"
